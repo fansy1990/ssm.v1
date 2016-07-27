@@ -21,6 +21,13 @@
     from table_user
     where name = #{name,jdbcType=VARCHAR}
   </select>
+  
+   <select id="query" resultMap="BaseResultMap">
+    select 
+    *
+    from table_user
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from table_user
     where id = #{id,jdbcType=INTEGER}

@@ -1,5 +1,7 @@
 package demo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +27,56 @@ public class UserController {
 		}
 		return new ModelAndView("home");
 
+	}
+
+	@RequestMapping(value = "insert")
+	public ModelAndView testInsert(String userName, int age) {
+		ModelAndView modelAndView = null;
+		int ret = this.userService.insert(new User(userName, age));
+		if (ret > 0) {
+			modelAndView = new ModelAndView("success");
+			modelAndView.addObject("num", ret);
+			return modelAndView;
+		}
+
+		return new ModelAndView("error");
+	}
+
+	@RequestMapping(value = "delete")
+	public ModelAndView testDelete(int id) {
+		ModelAndView modelAndView = null;
+		int ret = this.userService.delete(id);
+		if (ret > 0) {
+			modelAndView = new ModelAndView("success");
+			return modelAndView;
+		}
+
+		return new ModelAndView("error");
+	}
+
+	@RequestMapping(value = "update")
+	public ModelAndView testUpdate(int id, String userName, int age) {
+		ModelAndView modelAndView = null;
+		int ret = this.userService.update(new User(id, userName, age));
+		if (ret > 0) {
+			modelAndView = new ModelAndView("success");
+			return modelAndView;
+		}
+
+		return new ModelAndView("error");
+	}
+
+	@RequestMapping(value = "query")
+	public ModelAndView testQuery() {
+		ModelAndView modelAndView = null;
+		List<User> ret = this.userService.query();
+		if (ret.size() > 0) {
+			modelAndView = new ModelAndView("success");
+			modelAndView.addObject("ret", ret);
+			return modelAndView;
+		}
+
+		return new ModelAndView("error");
 	}
 
 	private boolean checkParams(String userName, String password) {
