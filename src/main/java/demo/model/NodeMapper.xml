@@ -8,6 +8,12 @@
     
     <collection property="children" ofType="demo.model.Node" column="id" select="getChildrenList"/>
   </resultMap>
+  <resultMap type="demo.model.Node" id="NormalResultMap">
+  	<id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="folder" jdbcType="INTEGER" property="folder" />
+    <result column="pid" property="pid"/>
+  </resultMap>
   <sql id="Base_Column_List">
     id, name, folder,pid
   </sql>
@@ -17,6 +23,12 @@
     from table_node t
     where t.id = #{id,jdbcType=INTEGER}
   </select>
+  
+  <select id="selectPage" resultMap="NormalResultMap">
+  
+  	select t.* from table_node t where t.id between #{param1} and #{param2}
+  </select>
+  
   <select id="getChildrenList" resultMap="BaseResultMap">
   	select t.* from table_node t where t.pid= #{id,jdbcType=INTEGER}
   </select>
