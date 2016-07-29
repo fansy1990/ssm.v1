@@ -5,16 +5,20 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="folder" jdbcType="INTEGER" property="folder" />
-    <result column="pid" jdbcType="INTEGER" property="pid" />
+    
+    <collection property="children" ofType="demo.model.Node" column="id" select="getChildrenList"/>
   </resultMap>
   <sql id="Base_Column_List">
-    id, name, folder, pid
+    id, name, folder,pid
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
-    <include refid="Base_Column_List" />
-    from table_node
-    where id = #{id,jdbcType=INTEGER}
+    t.* 
+    from table_node t
+    where t.id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="getChildrenList" resultMap="BaseResultMap">
+  	select t.* from table_node t where t.pid= #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from table_node

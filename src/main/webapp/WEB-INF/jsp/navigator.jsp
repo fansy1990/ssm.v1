@@ -25,24 +25,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <body>
 	<ul class="nav nav-pills">
-	<c:forEach items="${ret}" var="p">
-		@foreach (var item in Model) { if (item.Sons != null &&
-		item.Sons.Count > 0) {
-		<li class="dropdown"><a data-submenu="" data-toggle="dropdown"
-			tabindex="0">@item.MenuName<span class="caret"></span></a>
+	
+		<li class="dropdown">
+			<c:out value="${node.name} }"/>
 			<ul class="dropdown-menu">
-				@foreach (var sub in item.Sons) { if (sub.Sons != null &&
-				item.Sons.Count > 0) {
-				<li class="dropdown-submenu"><a tabindex="0">@sub.MenuName</a>
-					<ul class="dropdown-menu">
-						@foreach (var inner in sub.Sons) {
-						<li><a href="@inner.LinkUrl">@inner.MenuName</a></li> }
-					</ul></li>
-				<li class="divider"></li> } else {
-				<li><a href="@sub.LinkUrl">@sub.MenuName</a></li> } }
-			</ul></li> } else {
-		<li><a href="@item.LinkUrl">@item.MenuName</a></li> } }
-		</c:forEach>
+				<c:forEach items="${node.children}" var="p">
+				<li class="dropdown-submenu">
+					<c:out value="${p.name} }"/>
+				</li>
+				</c:forEach>
+			</ul>
+		<li>
 	</ul>
 </body>
 </html>

@@ -1,43 +1,60 @@
 package demo.model;
 
+import java.util.List;
+
 public class Node {
-    private Integer id;
+	private Integer id;
 
-    private String name;
+	private String name;
 
-    private Integer folder;
+	private Integer folder;
 
-    private Integer pid;
+	private Integer pid;
 
-    public Integer getId() {
-        return id;
-    }
+	private List<Node> children;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
+	public String getName() {
+		return name;
+	}
 
-    public Integer getFolder() {
-        return folder;
-    }
+	public void setName(String name) {
+		this.name = name == null ? null : name.trim();
+	}
 
-    public void setFolder(Integer folder) {
-        this.folder = folder;
-    }
+	public Integer getFolder() {
+		return folder;
+	}
 
-    public Integer getPid() {
-        return pid;
-    }
+	public void setFolder(Integer folder) {
+		this.folder = folder;
+	}
 
-    public void setPid(Integer pid) {
-        this.pid = pid;
-    }
+	public Integer getPid() {
+		return pid;
+	}
+
+	public void setPid(Integer pid) {
+		this.pid = pid;
+	}
+
+	public List<Node> getChildren() {
+		return children;
+	}
+
+	public void setChildren(List<Node> children) {
+		this.children = children;
+	}
+
+	@Override
+	public String toString() {
+		return this.id + "," + this.name;
+	}
 }
